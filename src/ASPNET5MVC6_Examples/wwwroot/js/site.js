@@ -1,4 +1,40 @@
 ﻿// site.js
 
-var ele = document.getElementById("username");
-ele.innerHTML = "Eduardo Caceres";
+// Javascript en ambito global
+
+//var ele = document.getElementById("username");
+//ele.innerHTML = "Eduardo Caceres";
+
+//var main = document.getElementById("main");
+
+//main.onmouseenter = function () {
+//    //IE-Firefox
+//    main.style = "background-color: #888;";
+//    //Chrome
+//    main.style["background-color"] = "#888;";
+
+//};
+
+//main.onmouseleave = function () {
+//    main.style["background-color"] = "";
+//};
+
+
+(function () {
+    var ele = document.getElementById("username");
+    ele.innerHTML = "Eduardo Caceres";
+
+    var main = document.getElementById("main");
+
+    main.onmouseenter = function () {
+        //IE-Firefox
+        main.style = "background-color: #888;";
+        //Chrome
+        main.style["background-color"] = "#888;";
+
+    };
+
+    main.onmouseleave = function () {
+        main.style["background-color"] = "";
+    };
+}());
