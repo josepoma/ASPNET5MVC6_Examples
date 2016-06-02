@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNet.Mvc;
+﻿using ASPNET5MVC6_Examples.Services;
+using ASPNET5MVC6_Examples.ViewModel;
+using Microsoft.AspNet.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +10,13 @@ namespace ASPNET5MVC6_Examples.Controllers.Web
 {
     public class AppController : Controller
     {
+        private IMailService _mailService;
+
+        public AppController(IMailService service)
+        {
+            _mailService = service;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -22,6 +31,31 @@ namespace ASPNET5MVC6_Examples.Controllers.Web
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Contact(ContactViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var email = Startup.Configuration["AppSettings:SiteEmailAddress"];
+
+                if (string.IsNullOrWhiteSpace(email))
+                {
+                    ModelState.AddModelError("","No se pudo enviar el mail!");
+                }
+                if (_mailService.SendMail(email, email, 
+                    $"Contact Page from: {model.Name} ({model.Email})",
+                    model.Message))
+                {
+                    ModelState.Clear();
+                    ViewBag.Message = "Mensaje Enviado, gracias!";
+                }
+                
+            }
+
+            return View();
+        }
+
 
     }
 }
