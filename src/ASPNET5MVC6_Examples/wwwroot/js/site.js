@@ -54,7 +54,7 @@
     var menuItems = $("ul.menu li a");
     menuItems.on("click", function () {
         var me = $(this);
-        alert("Hello"+me.text());
+        //alert("Hello"+me.text());
     });
 
 

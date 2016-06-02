@@ -13,5 +13,15 @@ namespace ASPNET5MVC6_Examples.Controllers.Web
             return View();
         }
 
+        public IActionResult About()
+        {
+            return View();
+        }
+
+        public IActionResult Contact()
+        {
+            return View();
+        }
+
     }
 }

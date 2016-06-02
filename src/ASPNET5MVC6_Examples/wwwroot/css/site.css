@@ -14,7 +14,7 @@ input{
     width:150px;
 }
 
-input[type=submit]{
+input[type=submit], input[type=password],textarea{
     width:auto;
 }
 
