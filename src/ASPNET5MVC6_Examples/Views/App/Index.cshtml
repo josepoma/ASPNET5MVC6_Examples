@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<ASPNET5MVC6_Examples.Models.Trip>
 <div class="row">
 
     <div class="col-md-6">
@@ -18,7 +18,13 @@
         </form>
     </div>
     <div class="col-md-6">
-        <h2> Texto 2</h2>
+        <h2> Viajes</h2>
+        <ul>
+            @foreach (var trip in Model)
+            {
+                <li>@trip.Name (@trip.Created.ToShortDateString())</li>
+            }
+        </ul>
     </div>
 
 </div>

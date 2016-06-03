@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using ASPNET5MVC6_Examples.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.PlatformAbstractions;
+using ASPNET5MVC6_Examples.Models;
 
 namespace ASPNET5MVC6_Examples
 {
@@ -28,12 +29,20 @@ namespace ASPNET5MVC6_Examples
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            //Añadiendo MVC
             services.AddMvc();
+
+            //Añadiendo EF7 y agregando un DBContext
+            services.AddEntityFramework().AddSqlServer().AddDbContext<WorldContext>();
+
+            services.AddTransient<WorldContextSeedData>();
+
             services.AddScoped<IMailService, DebugMailService>();
+            services.AddScoped<IWorldRepository, WorldRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, WorldContextSeedData seeder)
         {
             //app.UseIISPlatformHandler();
 
@@ -53,6 +62,8 @@ namespace ASPNET5MVC6_Examples
                     defaults: new { controller = "App", action = "Index" }
                 );
             });
+
+            seeder.EnsureSeedData();
 
         }
 

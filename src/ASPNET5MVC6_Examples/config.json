@@ -1,5 +1,8 @@
 ﻿{
   "AppSetings": {
     "SiteEmailAddress": "me@aol.com"
+  },
+  "Data": {
+    "WordlContextConnection": "Server=(localdb)\\ProjectsV13;Database=DBDemoEF7;Trusted_Connection=;MultipleActiveResultSets=true;"
   }
 }
