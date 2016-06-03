@@ -10,6 +10,7 @@ using ASPNET5MVC6_Examples.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.PlatformAbstractions;
 using ASPNET5MVC6_Examples.Models;
+using Microsoft.Extensions.Logging;
 
 namespace ASPNET5MVC6_Examples
 {
@@ -42,7 +43,7 @@ namespace ASPNET5MVC6_Examples
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, WorldContextSeedData seeder)
+        public void Configure(IApplicationBuilder app, WorldContextSeedData seeder,ILoggerFactory loggerFactory)
         {
             //app.UseIISPlatformHandler();
 
@@ -52,6 +53,9 @@ namespace ASPNET5MVC6_Examples
             //});
 
             //app.UseDefaultFiles();
+
+            loggerFactory.AddDebug(LogLevel.Debug);
+
             app.UseStaticFiles();
 
             app.UseMvc(config =>
