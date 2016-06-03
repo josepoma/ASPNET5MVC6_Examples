@@ -3,13 +3,15 @@
 <head>
     <meta charset="utf-8" />
     <title>Demo - @ViewBag.Title</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/lib/bootswatch/flatly/bootstrap.min.css"/>
     <link href="~/css/site.css" rel="stylesheet" />
 </head>
 <body>
     <div id="sidebar">
         <img src="~/img/jpoma.png" alt="Jose Poma" class="headshot" />
         <span id="username">Jose Poma</span>
-        <ul class="menu">
+        <ul class="nav">
             <li class="active"><a asp-controller="App" asp-action="Index">Home</a></li>
             <li><a asp-controller="App" asp-action="About">About</a></li>
             <li><a asp-controller="App" asp-action="Contact">Contact</a></li>
@@ -17,25 +19,43 @@
     </div>
 
     <div id="wrapper">
-        <div id="main">
-            <div>
-                <button id="sidebarToggle">Toogle Menu</button>
+
+
+        <div id="main" class="container-fluid">
+
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li>
+                            <div>
+                                <button id="sidebarToggle">Toogle Menu</button>
+                            </div>
+                        </li>
+                    </ul>
+                    <a asp-controller="App" asp-action="Infed" class="navbar-brand">Usando MVC 6 y Bootstrap</a>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" class="btn btn-sm btn-info">
+
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav><div>
+                @RenderBody();
             </div>
-           <div>
-               @RenderBody();
-           </div>
 
         </div>
-
-        <div id="footer">
-            &copy; 2016 JCLab
+        <div id="footer" class="container-fluid">
+            <div class="navbar navbar-inverse navbar-fixed-bottom"><h4 class="text-center text-info"> &copy; 2016 JCLab </h4> </div>
         </div>
     </div>
 
     <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="~/js/site.js"></script>
 
-    @RenderSection("ScriptsValidation",false);
+    @RenderSection("ScriptsValidation", false);
 
 </body>
 </html>
