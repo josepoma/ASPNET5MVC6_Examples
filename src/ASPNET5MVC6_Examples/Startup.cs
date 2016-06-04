@@ -11,6 +11,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.PlatformAbstractions;
 using ASPNET5MVC6_Examples.Models;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Serialization;
+using AutoMapper;
+using ASPNET5MVC6_Examples.ViewModel;
 
 namespace ASPNET5MVC6_Examples
 {
@@ -31,10 +34,20 @@ namespace ASPNET5MVC6_Examples
         public void ConfigureServices(IServiceCollection services)
         {
             //Añadiendo MVC
-            services.AddMvc();
+            services.AddMvc().AddJsonOptions(opt =>
+            {
+                opt.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            });
 
             //Añadiendo EF7 y agregando un DBContext
             services.AddEntityFramework().AddSqlServer().AddDbContext<WorldContext>();
+
+            //Añadir un Mapper
+            Mapper.Initialize(config =>
+            {
+                config.CreateMap<Trip, TripViewModel>().ReverseMap();
+                config.CreateMap<Stop, StopViewModel>().ReverseMap();
+            });
 
             services.AddTransient<WorldContextSeedData>();
 

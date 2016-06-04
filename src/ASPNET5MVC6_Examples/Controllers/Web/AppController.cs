@@ -26,6 +26,8 @@ namespace ASPNET5MVC6_Examples.Controllers.Web
             return View(trips);
         }
 
+        
+
         public IActionResult About()
         {
             return View();
